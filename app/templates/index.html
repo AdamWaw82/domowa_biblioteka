@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<h2>Lista książek</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autorzy</th>
+            <th>Status</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>
+                {% for author in book.authors %}
+                    {{ author.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ "Nie wypożyczona" if book.is_on_shelf else "Wypożyczona" }}</td>
+            <td>
+                {% if book.is_on_shelf %}
+                <a href="{{ url_for('lend_book', book_id=book.id) }}" class="btn btn-primary btn-sm">Wypożycz</a>
+                {% else %}
+                <form action="{{ url_for('return_book', book_id=book.id) }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-success btn-sm">Zwróć</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

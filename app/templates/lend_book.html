@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Wypożycz książkę: {{ book.title }}</h2>
+<form method="POST" action="{{ url_for('lend_book', book_id=book.id) }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.borrower.label(class="form-label") }}
+        {{ form.borrower(class="form-control") }}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Wypożycz</button>
+    </div>
+</form>
+{% endblock %}

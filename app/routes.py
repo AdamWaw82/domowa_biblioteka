@@ -1,7 +1,8 @@
-from flask import render_template
+from flask import render_template, flash, redirect, url_for
 
-from app import app
-from app.models import Book
+from app import app, db
+from app.forms import AddAuthorForm, AddBookForm
+from app.models import Book, Author
 
 
 @app.route('/')
@@ -10,19 +11,32 @@ def index():
     return render_template('index.html', books=books)
 
 
-@app.route('/add_book', methods=['POST'])
+@app.route('/add_book', methods=['GET', 'POST'])
 def add_book():
-    pass
+    form = AddBookForm()
+    if form.validate_on_submit():
+        book = Book(title=form.title.data)
+        ids = Author.id.in_(form.authors.data)
+        selected_authors = Author.query.filter(ids).all()
+        book.authors.extend(selected_authors)
+        db.session.add(book)
+        db.session.commit()
+        flash('Book added successfully!')
+        return redirect(url_for('index'))
+    return render_template('add_book.html', form=form)
 
 
-@app.route('/get_book/<int:book_id>', methods=['GET'])
-def get_book(book_id):
-    pass
-
-
-@app.route('/add_author', methods=['POST'])
+@app.route('/add_author', methods=['GET', 'POST'])
 def add_author():
-    pass
+    form = AddAuthorForm()
+    if form.validate_on_submit():
+        author = Author(name=form.name.data)
+        db.session.add(author)
+        db.session.commit()
+        flash('Author added successfully!')
+        return redirect(url_for('index'))
+    return render_template('add_author.html', form=form)
+
 
 
 @app.route('/get_author', methods=['POST'])
