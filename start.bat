@@ -11,9 +11,6 @@ echo Środowisko wirtualne aktywowane.
 REM Instalacja zależności
 pip install -r requirements.txt
 
-set FLASK_APP=run.py
-set FLASK_ENV=development
-
 flask db init
 flask db migrate
 flask db upgrade

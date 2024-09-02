@@ -26,3 +26,7 @@ Domowa Biblioteka to aplikacja webowa napisana w Flasku, która pozwala na zarz�
 
    ```bash
     start.bat
+   
+3. Uruchom przeglądrkę wpisz adres:
+   ```bash
+   http://127.0.0.1:5000
