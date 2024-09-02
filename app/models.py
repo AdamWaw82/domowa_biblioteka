@@ -23,8 +23,6 @@ class Author(db.Model):
 
 
 class BorrowRecord(db.Model):
-    import pytz
-    print(pytz.all_timezones)
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     borrower = db.Column(db.String(120), nullable=False)

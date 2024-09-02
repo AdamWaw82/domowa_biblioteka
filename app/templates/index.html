@@ -23,10 +23,10 @@
             <td>{{ "Nie wypożyczona" if book.is_on_shelf else "Wypożyczona" }}</td>
             <td>
                 {% if book.is_on_shelf %}
-                <a href="{{ url_for('lend_book', book_id=book.id) }}" class="btn btn-primary btn-sm">Wypożycz</a>
+                <a href="{{ url_for('lend_book', book_id=book.id) }}" class="btn btn-success btn-sm">Wypożycz</a>
                 {% else %}
                 <form action="{{ url_for('return_book', book_id=book.id) }}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-success btn-sm">Zwróć</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Zwróć</button>
                 </form>
                 {% endif %}
             </td>
