@@ -19,7 +19,7 @@ Domowa Biblioteka to aplikacja webowa napisana w Flasku, ktÃ³ra pozwala na zarzÄ
 1. **Sklonuj repozytorium** (lub pobierz pliki jako ZIP):
 
    ```bash
-   git clone https://github.com/twoje_repo/domowa_biblioteka.git
+   git clone https://github.com/AdamWaw82/domowa_biblioteka.git
    cd domowa_biblioteka
    
 2. Uruchom plik start Linux start.sh / Windows: start.bat:
